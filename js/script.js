@@ -1,26 +1,22 @@
 /* ============================================================
-   1. NAVBAR: cambia de fondo al hacer scroll
-   ============================================================ 
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 40);
-});*/
-
-/* Menú móvil */
+   1. NAVBAR: menú móvil y enlaces
+   ============================================================ */
 const navToggle = document.getElementById('navToggle');
 const mobileMenu = document.getElementById('mobileMenu');
-navToggle.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('open');
-  navToggle.setAttribute('aria-expanded', isOpen);
-  navToggle.textContent = isOpen ? '✕' : '☰';
-});
-mobileMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    navToggle.textContent = '☰';
-    navToggle.setAttribute('aria-expanded', false);
+if (navToggle && mobileMenu) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? '✕' : '☰';
   });
-});
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      navToggle.textContent = '☰';
+      navToggle.setAttribute('aria-expanded', false);
+    });
+  });
+}
 
 /* ============================================================
    2. TABS: talleres por semestre
@@ -35,7 +31,8 @@ tabButtons.forEach(btn => {
 
     btn.classList.add('active');
     btn.setAttribute('aria-selected','true');
-    document.getElementById(btn.dataset.tab).classList.add('active');
+    const target = document.getElementById(btn.dataset.tab);
+    if(target) target.classList.add('active');
   });
 });
 
@@ -45,47 +42,46 @@ tabButtons.forEach(btn => {
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  let valid = true;
+if (contactForm && formStatus) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
 
-  const nombre = document.getElementById('nombre');
-  const correo = document.getElementById('correo');
-  const mensaje = document.getElementById('mensaje');
+    const nombre = document.getElementById('nombre');
+    const correo = document.getElementById('correo');
+    const mensaje = document.getElementById('mensaje');
 
-  const setError = (input, hasError) => {
-    const wrapper = input.closest('.form-field');
-    wrapper.classList.toggle('error', hasError);
-    if (hasError) valid = false;
-  };
+    const setError = (input, hasError) => {
+      if(!input) return;
+      const wrapper = input.closest('.form-field');
+      if(wrapper) wrapper.classList.toggle('error', hasError);
+      if (hasError) valid = false;
+    };
 
-  setError(nombre, nombre.value.trim() === '');
+    if(nombre) setError(nombre, nombre.value.trim() === '');
+    const emailOk = correo ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.value.trim()) : false;
+    if(correo) setError(correo, !emailOk);
+    if(mensaje) setError(mensaje, mensaje.value.trim() === '');
 
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.value.trim());
-  setError(correo, !emailOk);
+    formStatus.classList.remove('show','ok');
 
-  setError(mensaje, mensaje.value.trim() === '');
-
-  formStatus.classList.remove('show','ok');
-
-  if (valid) {
-    formStatus.textContent = '¡Gracias! Tu mensaje fue enviado.';
-    formStatus.classList.add('show','ok');
-    contactForm.reset();
-    // AQUÍ VA LA LÓGICA REAL DE ENVÍO (fetch a tu backend, EmailJS, etc.)
-  } else {
-    formStatus.textContent = 'Por favor completa los campos marcados.';
-    formStatus.classList.add('show');
-  }
-});
+    if (valid) {
+      formStatus.textContent = '¡Gracias! Tu mensaje fue enviado.';
+      formStatus.classList.add('show','ok');
+      contactForm.reset();
+    } else {
+      formStatus.textContent = 'Por favor completa los campos marcados.';
+      formStatus.classList.add('show');
+    }
+  });
+}
 
 /* ============================================================
    4. ELEMENTO FIRMA: red de nodos sinápticos animada (hero)
-   Representa la síntesis de elementos distintos — el concepto
-   central de "Synectis".
    ============================================================ */
 (function buildSynapseGrid(){
   const svg = document.getElementById('synapseSvg');
+  if(!svg) return;
   const ns = 'http://www.w3.org/2000/svg';
   const W = 1200, H = 800;
   const cols = 8, rows = 6;
@@ -100,7 +96,6 @@ contactForm.addEventListener('submit', (e) => {
     }
   }
 
-  // líneas entre nodos cercanos
   const maxDist = 220;
   for(let a=0;a<nodes.length;a++){
     for(let b=a+1;b<nodes.length;b++){
@@ -150,8 +145,6 @@ contactForm.addEventListener('submit', (e) => {
 
 /* ============================================================
    5. ANIMACIÓN DE REVELADO AL HACER SCROLL
-   Le da "vida" a todas las secciones (no solo el hero): las
-   tarjetas y títulos entran suavemente cuando aparecen en pantalla.
    ============================================================ */
 (function initScrollReveal(){
   const targets = document.querySelectorAll(
@@ -178,8 +171,6 @@ contactForm.addEventListener('submit', (e) => {
 
 /* ============================================================
    6. HERO — parallax sutil con el mouse
-   Mueve el contenido y la red de nodos en direcciones opuestas
-   al mover el mouse, para dar sensación de profundidad "gamer".
    ============================================================ */
 (function initHeroParallax(){
   const hero = document.querySelector('.hero');
@@ -209,11 +200,13 @@ const modalClose = document.getElementById('modalClose');
 const openModalBtns = document.querySelectorAll('[data-open-modal]');
 
 function openModal(){
+  if(!modal) return;
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
 }
 function closeModal(){
+  if(!modal) return;
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
@@ -221,28 +214,26 @@ function closeModal(){
 
 openModalBtns.forEach(btn => btn.addEventListener('click', openModal));
 
-/* Si alguien intentó entrar directo a portal.html sin haberse
-   registrado, lo regresamos aquí con ?acceso=requerido y le
-   abrimos el modal de registro automáticamente. */
 if (new URLSearchParams(window.location.search).get('acceso') === 'requerido') {
   openModal();
   const hint = document.getElementById('regFormStatus');
-  hint.textContent = 'Primero completa tu registro para entrar a tu portal de asistente.';
-  hint.classList.add('show');
+  if(hint) {
+    hint.textContent = 'Primero completa tu registro para entrar a tu portal de asistente.';
+    hint.classList.add('show');
+  }
 }
-modalClose.addEventListener('click', closeModal);
+if(modalClose) modalClose.addEventListener('click', closeModal);
 
-// cerrar al hacer clic fuera del cuadro del modal
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) closeModal();
-});
+if(modal) {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+}
 
-// cerrar con la tecla Escape
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  if (e.key === 'Escape' && modal && modal.classList.contains('open')) closeModal();
 });
 
-/* ---- pestañas internas del modal: Datos / Preferencias / Itinerario ---- */
 const stepButtons = document.querySelectorAll('.modal-step-btn');
 const stepPanels = document.querySelectorAll('.modal-step-panel');
 
@@ -253,11 +244,11 @@ stepButtons.forEach(btn => {
 
     btn.classList.add('active');
     btn.setAttribute('aria-selected','true');
-    document.querySelector(`[data-step-panel="${btn.dataset.step}"]`).classList.add('active');
+    const panel = document.querySelector(`[data-step-panel="${btn.dataset.step}"]`);
+    if(panel) panel.classList.add('active');
   });
 });
 
-/* ---- pestañas de días dentro del itinerario ---- */
 const itinTabButtons = document.querySelectorAll('.itin-tab-btn');
 const itinDayPanels = document.querySelectorAll('.itin-day');
 
@@ -268,88 +259,86 @@ itinTabButtons.forEach(btn => {
 
     btn.classList.add('active');
     btn.setAttribute('aria-selected','true');
-    document.querySelector(`[data-itin-panel="${btn.dataset.itinDay}"]`).classList.add('active');
+    const panel = document.querySelector(`[data-itin-panel="${btn.dataset.itinDay}"]`);
+    if(panel) panel.classList.add('active');
   });
 });
 
-/* ---- casilla "postularme como staff": muestra campos extra ---- */
 const staffCheckbox = document.getElementById('reg-staff');
 const staffExtra = document.getElementById('staffExtra');
 
-staffCheckbox.addEventListener('change', () => {
-  staffExtra.hidden = !staffCheckbox.checked;
-});
+if(staffCheckbox && staffExtra) {
+  staffCheckbox.addEventListener('change', () => {
+    staffExtra.hidden = !staffCheckbox.checked;
+  });
+}
 
-/* ---- validación del formulario de registro ---- */
 const registroForm = document.getElementById('registroForm');
 const regFormStatus = document.getElementById('regFormStatus');
 
-registroForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  let valid = true;
+if(registroForm && regFormStatus) {
+  registroForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
 
-  const nombre = document.getElementById('reg-nombre');
-  const correo = document.getElementById('reg-correo');
-  const talla  = document.getElementById('reg-talla');
-  const areaStaff = document.getElementById('reg-area-staff');
+    const nombre = document.getElementById('reg-nombre');
+    const correo = document.getElementById('reg-correo');
+    const talla  = document.getElementById('reg-talla');
+    const areaStaff = document.getElementById('reg-area-staff');
 
-  const setError = (input, hasError) => {
-    const wrapper = input.closest('.form-field');
-    wrapper.classList.toggle('error', hasError);
-    if (hasError) valid = false;
-  };
-
-  setError(nombre, nombre.value.trim() === '');
-
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.value.trim());
-  setError(correo, !emailOk);
-
-  setError(talla, talla.value === '');
-
-  // si la persona quiere ser staff, el área es obligatoria
-  if (staffCheckbox.checked){
-    setError(areaStaff, areaStaff.value === '');
-  }
-
-  regFormStatus.classList.remove('show','ok');
-
-  if (valid) {
-    // Construimos el objeto con los datos del asistente.
-    // AQUÍ, en un proyecto real, en vez de guardar en localStorage
-    // enviarías estos datos a tu backend (fetch/POST) y el backend
-    // te devolvería un token o ID de sesión para el portal.
-    const registro = {
-      nombre: nombre.value.trim(),
-      correo: correo.value.trim(),
-      carrera: document.getElementById('reg-carrera').value.trim(),
-      semestre: document.getElementById('reg-semestre').value,
-      talla: talla.value,
-      esStaff: staffCheckbox.checked,
-      areaStaff: staffCheckbox.checked ? areaStaff.value : '',
-      disponibilidad: staffCheckbox.checked ? document.getElementById('reg-disponibilidad').value.trim() : '',
-      fechaRegistro: new Date().toISOString()
+    const setError = (input, hasError) => {
+      if(!input) return;
+      const wrapper = input.closest('.form-field');
+      if(wrapper) wrapper.classList.toggle('error', hasError);
+      if (hasError) valid = false;
     };
 
-    localStorage.setItem('synectisRegistro', JSON.stringify(registro));
+    if(nombre) setError(nombre, nombre.value.trim() === '');
+    const emailOk = correo ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.value.trim()) : false;
+    if(correo) setError(correo, !emailOk);
+    if(talla) setError(talla, talla.value === '');
 
-    regFormStatus.textContent = '¡Registro confirmado! Redirigiendo a tu portal...';
-    regFormStatus.classList.add('show','ok');
+    if (staffCheckbox && staffCheckbox.checked && areaStaff){
+      setError(areaStaff, areaStaff.value === '');
+    }
 
-    // Pequeña pausa para que la persona alcance a leer el mensaje
-    // antes de mandarla al "acceso secreto" (portal.html).
-    setTimeout(() => {
-      window.location.href = 'portal.html';
-    }, 900);
-  } else {
-    // si hay error, siempre regresa a la pestaña de Datos o Preferencias según corresponda
-    const targetStep = (!nombre.value.trim() || !emailOk) ? 'datos' : 'preferencias';
-    document.querySelector(`.modal-step-btn[data-step="${targetStep}"]`).click();
+    regFormStatus.classList.remove('show','ok');
 
-    regFormStatus.textContent = 'Revisa los campos marcados antes de continuar.';
-    regFormStatus.classList.add('show');
-  }
-});
+    if (valid) {
+      const registro = {
+        nombre: nombre ? nombre.value.trim() : '',
+        correo: correo ? correo.value.trim() : '',
+        carrera: document.getElementById('reg-carrera') ? document.getElementById('reg-carrera').value.trim() : '',
+        semestre: document.getElementById('reg-semestre') ? document.getElementById('reg-semestre').value : '',
+        talla: talla ? talla.value : '',
+        esStaff: staffCheckbox ? staffCheckbox.checked : false,
+        areaStaff: staffCheckbox && staffCheckbox.checked && areaStaff ? areaStaff.value : '',
+        disponibilidad: staffCheckbox && staffCheckbox.checked && document.getElementById('reg-disponibilidad') ? document.getElementById('reg-disponibilidad').value.trim() : '',
+        fechaRegistro: new Date().toISOString()
+      };
 
+      localStorage.setItem('synectisRegistro', JSON.stringify(registro));
+
+      regFormStatus.textContent = '¡Registro confirmado! Redirigiendo a tu portal...';
+      regFormStatus.classList.add('show','ok');
+
+      setTimeout(() => {
+        window.location.href = 'portal.html';
+      }, 900);
+    } else {
+      const targetStep = (!nombre || !nombre.value.trim() || !emailOk) ? 'datos' : 'preferencias';
+      const targetBtn = document.querySelector(`.modal-step-btn[data-step="${targetStep}"]`);
+      if(targetBtn) targetBtn.click();
+
+      regFormStatus.textContent = 'Revisa los campos marcados antes de continuar.';
+      regFormStatus.classList.add('show');
+    }
+  });
+}
+
+/* ============================================================
+   8. EVENTOS INTERACTIVOS (Galería de Actividades - CORREGIDO)
+   ============================================================ */
 const eventsData = {
   1: {
     badge: "Torneo de videojuegos",
@@ -412,12 +401,19 @@ function showEventDetails(eventId) {
   setTimeout(() => {
     const data = eventsData[eventId];
     if (data) {
-      document.getElementById('eventBadge').innerText = data.badge;
-      document.getElementById('eventTitle').innerText = data.title;
-      document.getElementById('eventDesc').innerText = data.desc;
-      document.getElementById('eventDate').innerText = data.date;
-      document.getElementById('eventTime').innerText = data.time;
-      document.getElementById('eventLocation').innerText = data.location;
+      const badge = document.getElementById('eventBadge');
+      const title = document.getElementById('eventTitle');
+      const desc = document.getElementById('eventDesc');
+      const date = document.getElementById('eventDate');
+      const time = document.getElementById('eventTime');
+      const location = document.getElementById('eventLocation');
+
+      if(badge) badge.innerText = data.badge;
+      if(title) title.innerText = data.title;
+      if(desc) desc.innerText = data.desc;
+      if(date) date.innerText = data.date;
+      if(time) time.innerText = data.time;
+      if(location) location.innerText = data.location;
     }
 
     panel.style.opacity = '1';
@@ -425,9 +421,7 @@ function showEventDetails(eventId) {
   }, 150);
 }
 
-// Asignar los eventos de clic automáticamente al cargar la página
-// Reemplaza el bloque final de tu script.js por esto:
-
+// Inicialización segura con verificación de estado del documento
 function initEventCards() {
   const cards = document.querySelectorAll('.event-card-thumb');
   cards.forEach(card => {
@@ -438,11 +432,8 @@ function initEventCards() {
   });
 }
 
-// Si el documento ya cargó, ejecutar directo; si no, esperar al evento
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initEventCards);
 } else {
   initEventCards();
 }
-
-
