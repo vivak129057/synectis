@@ -363,25 +363,33 @@ const eventsData = {
     badge: "Entretenimiento & Comedia",
     title: "Sistemas tiene talento",
     desc: "Un espacio de distensión, risas, y diversión para los asistentes, con presentaciones de comedia, sketches y talentos ocultos de la comunidad estudiantil.",
-    date: " Miercoles 11 de Noviembre",
+    date: "Miércoles 11 de Noviembre",
     time: "12:00 hrs",
     location: "Explanada de sistemas"
   },
   3: {
     badge: "100 mexicanos versión sistemas",
-    title: "100 sistematicos",
+    title: "100 sistemáticos",
     desc: "Un evento de preguntas y respuestas con temática de cultura general, sistemas, maestros, alumnos donde los asistentes podrán demostrar sus conocimientos y ganar premios.",
     date: "Lunes 09 de Noviembre",
     time: "13:00 hrs",
     location: "Edificio de sistemas"
   },
   4: {
-    badge: "Gran Sorteo Anual",
-    title: "Rifa de Premios Synectis 2026",
-    desc: "Participa con tu registro al simposio en la rifa de los equipos tecnológicos principales al finalizar el evento del cierre oficial.",
-    date: "Viernes 13 de Noviembre (Clausura)",
-    time: "12:30 hrs",
-    location: "Gimnasio Auditorio"
+    badge: "Tecnología & Concurso",
+    title: "Buscando a Linux",
+    desc: "Demuestra tu dominio encontrando archivos ocultos, configurando servicios y resolviendo retos en distribuciones Linux en el menor tiempo posible.",
+    date: "Martes 10 de Noviembre",
+    time: "11:00 hrs",
+    location: "Laboratorio de Redes"
+  },
+  5: {
+    badge: "Dinámica & Premios",
+    title: "Lotería sistemática",
+    desc: "Diviértete con la tradicional lotería adaptada con conceptos de ingeniería en sistemas. ¡Gana premios instantáneos completando tu tabla!",
+    date: "Jueves 12 de Noviembre",
+    time: "14:00 hrs",
+    location: "Vestíbulo Principal"
   }
 };
 
@@ -390,7 +398,11 @@ function showEventDetails(eventId) {
   document.querySelectorAll('.event-card-thumb').forEach(thumb => {
     thumb.classList.remove('active');
   });
-  document.querySelector(`[data-event="${eventId}"]`).classList.add('active');
+  
+  const activeThumb = document.querySelector(`[data-event="${eventId}"]`);
+  if (activeThumb) {
+    activeThumb.classList.add('active');
+  }
 
   // Actualizar contenido de la tarjeta de detalles con animación sutil
   const panel = document.getElementById('eventDetailsPanel');
@@ -399,12 +411,14 @@ function showEventDetails(eventId) {
 
   setTimeout(() => {
     const data = eventsData[eventId];
-    document.getElementById('eventBadge').innerText = data.badge;
-    document.getElementById('eventTitle').innerText = data.title;
-    document.getElementById('eventDesc').innerText = data.desc;
-    document.getElementById('eventDate').innerText = data.date;
-    document.getElementById('eventTime').innerText = data.time;
-    document.getElementById('eventLocation').innerText = data.location;
+    if (data) {
+      document.getElementById('eventBadge').innerText = data.badge;
+      document.getElementById('eventTitle').innerText = data.title;
+      document.getElementById('eventDesc').innerText = data.desc;
+      document.getElementById('eventDate').innerText = data.date;
+      document.getElementById('eventTime').innerText = data.time;
+      document.getElementById('eventLocation').innerText = data.location;
+    }
 
     panel.style.opacity = '1';
     panel.style.transform = 'translateY(0)';
