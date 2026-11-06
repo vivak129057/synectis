@@ -555,8 +555,13 @@ section{ position:relative; padding:96px 0; }
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 30px;
-  align-items: start; /* Cambiado de center a start */
+  align-items: start;
   margin-top: 30px;
+  min-width: 0; /* Evita que el contenedor grid colapse */
+}
+
+.events-interactive-wrapper > * {
+  min-width: 0; /* Evita que las columnas colapsen por el contenido interno */
 }
 
 .gallery-subtitle {
