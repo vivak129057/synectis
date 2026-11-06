@@ -426,7 +426,9 @@ function showEventDetails(eventId) {
 }
 
 // Asignar los eventos de clic automáticamente al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
+// Reemplaza el bloque final de tu script.js por esto:
+
+function initEventCards() {
   const cards = document.querySelectorAll('.event-card-thumb');
   cards.forEach(card => {
     card.addEventListener('click', () => {
@@ -434,6 +436,13 @@ document.addEventListener('DOMContentLoaded', () => {
       showEventDetails(eventId);
     });
   });
-});
+}
+
+// Si el documento ya cargó, ejecutar directo; si no, esperar al evento
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initEventCards);
+} else {
+  initEventCards();
+}
 
 
