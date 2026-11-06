@@ -305,6 +305,9 @@ if(registroForm && regFormStatus) {
     regFormStatus.classList.remove('show','ok');
 
     if (valid) {
+      // Obtenemos también el evento de interés guardado previamente
+      const eventoInteresGuardado = localStorage.getItem('eventoInteres') || '';
+
       const registro = {
         nombre: nombre ? nombre.value.trim() : '',
         correo: correo ? correo.value.trim() : '',
@@ -314,6 +317,7 @@ if(registroForm && regFormStatus) {
         esStaff: staffCheckbox ? staffCheckbox.checked : false,
         areaStaff: staffCheckbox && staffCheckbox.checked && areaStaff ? areaStaff.value : '',
         disponibilidad: staffCheckbox && staffCheckbox.checked && document.getElementById('reg-disponibilidad') ? document.getElementById('reg-disponibilidad').value.trim() : '',
+        eventoInteres: eventoInteresGuardado,
         fechaRegistro: new Date().toISOString()
       };
 
@@ -337,7 +341,7 @@ if(registroForm && regFormStatus) {
 }
 
 /* ============================================================
-   8. EVENTOS INTERACTIVOS (Galería de Actividades - CORREGIDO)
+   8. EVENTOS INTERACTIVOS (Galería de Actividades)
    ============================================================ */
 const eventsData = {
   1: {
@@ -382,7 +386,11 @@ const eventsData = {
   }
 };
 
+let eventoSeleccionadoActual = 1; // ID del evento seleccionado por defecto
+
 function showEventDetails(eventId) {
+  eventoSeleccionadoActual = eventId; // Actualizamos el evento actual
+
   document.querySelectorAll('.event-card-thumb').forEach(thumb => {
     thumb.classList.remove('active');
   });
@@ -421,7 +429,7 @@ function showEventDetails(eventId) {
   }, 150);
 }
 
-// Inicialización segura con verificación de estado del documento
+// Inicialización de tarjetas de eventos y botón de inscripción
 function initEventCards() {
   const cards = document.querySelectorAll('.event-card-thumb');
   cards.forEach(card => {
@@ -430,6 +438,17 @@ function initEventCards() {
       showEventDetails(eventId);
     });
   });
+
+  // Vinculamos el botón de inscripción del panel de eventos para recordar la elección
+  const btnInscribir = document.getElementById('btnInscribirEvento');
+  if (btnInscribir) {
+    btnInscribir.addEventListener('click', () => {
+      const eventoInfo = eventsData[eventoSeleccionadoActual];
+      if (eventoInfo) {
+        localStorage.setItem('eventoInteres', eventoInfo.title);
+      }
+    });
+  }
 }
 
 if (document.readyState === 'loading') {
