@@ -394,7 +394,7 @@ const eventsData = {
 let eventoSeleccionadoActual = 1; // ID del evento seleccionado por defecto
 
 function showEventDetails(eventId) {
-  eventoSeleccionadoActual = eventId; // Actualizamos el evento actual
+  eventoSeleccionadoActual = eventId; 
 
   document.querySelectorAll('.event-card-thumb').forEach(thumb => {
     thumb.classList.remove('active');
@@ -427,6 +427,12 @@ function showEventDetails(eventId) {
       if(date) date.innerText = data.date;
       if(time) time.innerText = data.time;
       if(location) location.innerText = data.location;
+
+      // Actualizar el enlace del botón si es un enlace externo (<a>) o guardar el valor
+      const btnInscribir = document.getElementById('btnInscribirEvento');
+      if (btnInscribir && data.formLink) {
+        btnInscribir.setAttribute('href', data.formLink); // Si decides cambiar el botón por un <a>
+      }
     }
 
     panel.style.opacity = '1';
