@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYNECTIS 2026 · Diseñando el mañana</title>
+<meta name="description" content="XXXIII Simposium de Ingeniería en Sistemas Computacionales — Instituto Tecnológico de Nuevo Laredo">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ============================================================
+     FONDO INTERACTIVO GLOBAL (retro/videojuego)
+     Canvas fijo detrás de TODO el sitio: grid + partículas que
+     reaccionan al mouse. Se dibuja en js/script.js.
+     ============================================================ -->
+<canvas class="bg-canvas" id="bgCanvas" aria-hidden="true"></canvas>
+<div class="bg-vignette" aria-hidden="true"></div>
+<div class="crt-overlay" aria-hidden="true"></div>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="#inicio" class="nav-logo">
+      <!-- AQUÍ VA EL LOGO DEL EVENTO (reemplaza el src) -->
+      <img src="C:\Users\Gabo\Downloads\synectis-2026\assets\img\ISC LOGO-01 (1).png" alt="Logo SYNECTIS 2026">
+      SYNECTIS 2026
+    </a>
+
+    <nav class="nav-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#ejes">Ejes</a>
+      <a href="#talleres">Talleres</a>
+      <a href="#experiencia">Actividades</a>
+      <a href="#patrocinios">Patrocinios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#inicio">Inicio</a>
+    <a href="#ejes">Ejes</a>
+    <a href="#talleres">Talleres</a>
+    <a href="#experiencia">Actividades</a>
+    <a href="#patrocinios">Patrocinios</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO / INICIO
+     ============================================================ -->
+<section class="hero" id="inicio">
+  <!-- VIDEO DE FONDO -->
+  <video class="hero-video" autoplay muted loop playsinline poster="https://via.placeholder.com/1200x800/0a0a12/7c3aed?text=SYNECTIS+2026">
+    <source src="C:\Users\Gabo\Downloads\synectis-2026\assets\video\Animacin de Logotipo 3D_0p.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <svg class="hero-grid-canvas" id="synapseSvg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+
+  <div class="container hero-content">
+    <span class="hero-kicker">XXXIII Simposium · Ingeniería en Sistemas Computacionales</span>
+    <h1 class="hero-title">
+     XXXIII Simposium de Ingeniería en Sistemas Computacionales
+    </h1>
+    <p class="hero-subtitle">SYNECTIS: Diseñando el mañana</p>
+    <p class="hero-meta">
+      <strong>09 al 13 de Noviembre de 2026</strong> · Instituto Tecnológico de Nuevo Laredo
+    </p>
+    <div class="hero-ctas">
+      <button type="button" class="btn btn-primary" data-open-modal="registro">Registrarme</button>
+      <a href="#patrocinios" class="btn btn-outline">Ser Patrocinador</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONCEPTO — ¿QUÉ ES SYNECTIS?
+     ============================================================ -->
+<section id="concepto">
+  <div class="container">
+    <span class="eyebrow">El concepto</span>
+    <h2 class="section-title">¿Qué es Synectis?</h2>
+    <p class="section-sub"><!-- AQUÍ VA UNA BREVE INTRODUCCIÓN AL CONCEPTO DEL EVENTO --></p>
+
+    <div class="concept-grid">
+      <div class="concept-col">
+        <h3><span>01</span> Significado</h3>
+        <p>Synectis significa  “unión de elementos distintos y aparentemente irrelevantes”. 
+Como teoría, estudia los procesos psicológicos que facilitan la creatividad; como
+método, ofrece un procedimiento estructurado para aumentar las probabilidades
+de encontrar soluciones innovadoras.
+        </p>
+      </div>
+      <div class="concept-col">
+        <h3><span>02</span> Propósito</h3>
+        <p>
+          Expandir la visión profesional del ingeniero en sistemas, yendo más allá de la
+programación tradicional hacia el diseño estratégico de soluciones tecnológicas
+integrales, eficientes y de alto impacto.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="thread-divider container"></div>
+
+<!-- ============================================================
+     EJES TEMÁTICOS
+     ============================================================ -->
+<section id="ejes">
+  <div class="container">
+    <span class="eyebrow">Contenido académico</span>
+    <h2 class="section-title">Ejes temáticos</h2>
+    <p class="section-sub">Cinco líneas de conferencias que atraviesan el simposio.</p>
+
+    <div class="ejes-grid">
+      <article class="card">
+        <span class="card-index">EJE 01</span>
+        <h4>El futuro de la ingeniería creativa</h4>
+        <p><!-- AQUÍ VAN LOS SUBTEMAS / DESCRIPCIÓN DEL EJE 1 --></p>
+      </article>
+      <article class="card">
+        <span class="card-index">EJE 02</span>
+        <h4>Ciberseguridad empresarial</h4>
+        <p><!-- AQUÍ VAN LOS SUBTEMAS / DESCRIPCIÓN DEL EJE 2 --></p>
+      </article>
+      <article class="card">
+        <span class="card-index">EJE 03</span>
+        <h4>El ingeniero como arquitecto de la sociedad</h4>
+        <p><!-- AQUÍ VAN LOS SUBTEMAS / DESCRIPCIÓN DEL EJE 3 --></p>
+      </article>
+      <article class="card">
+        <span class="card-index">EJE 04</span>
+        <h4>Ciberseguridad forense</h4>
+        <p><!-- AQUÍ VAN LOS SUBTEMAS / DESCRIPCIÓN DEL EJE 4 --></p>
+      </article>
+      <article class="card">
+        <span class="card-index">EJE 05</span>
+        <h4>Liderazgo disruptivo y el potencial de las nuevas generaciones</h4>
+        <p><!-- AQUÍ VAN LOS SUBTEMAS / DESCRIPCIÓN DEL EJE 5 --></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="thread-divider container"></div>
+
+<!-- ============================================================
+     TALLERES POR SEMESTRE — TABS
+     ============================================================ -->
+<section id="talleres">
+  <div class="container">
+    <span class="eyebrow">Práctica</span>
+    <h2 class="section-title">Talleres por semestre</h2>
+    <p class="section-sub">Selecciona tu semestre para ver los talleres disponibles.</p>
+
+    <div class="tabs-bar" role="tablist" id="tabsBar">
+      <button class="tab-btn active" data-tab="sem1" role="tab" aria-selected="true">1° Semestre</button>
+      <button class="tab-btn" data-tab="sem3" role="tab" aria-selected="false">3° Semestre</button>
+      <button class="tab-btn" data-tab="sem5" role="tab" aria-selected="false">5° Semestre</button>
+      <button class="tab-btn" data-tab="sem7" role="tab" aria-selected="false">7° Semestre</button>
+      <button class="tab-btn" data-tab="sem9" role="tab" aria-selected="false">9° Semestre</button>
+    </div>
+
+    <!-- 1° SEMESTRE -->
+    <div class="tab-panel active" id="sem1">
+      <div class="taller-grid">
+        <div class="taller-card">
+          <h5>Mantenimiento de computadoras</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Eric Balderas Flores / Carlos Eduardo Villalobos Aguilar</span>
+            <span><b>Horario:</b> Martes a Viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5>Mantenimiento de computadoras</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Adrián Vargas Ramírez</span>
+            <span><b>Horario:</b> Martes a Viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5>Mantenimiento de computadoras</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Daniel Osvaldo Govea Martínes</span>
+            <span><b>Horario:</b> Martes a Viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5>Mantenimiento de computadoras</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Jorge Rolando Barrios Ávila</span>
+            <span><b>Horario:</b> Martes a Viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5>Mantenimiento de computadoras</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Hugo Rangel Madrigales</span>
+            <span><b>Horario:</b> Martes a Viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5>Mantenimiento de computadoras</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Pedro Alberto Castro Góngora</span>
+            <span><b>Horario:</b> Martes a Viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3° SEMESTRE -->
+    <div class="tab-panel" id="sem3">
+      <div class="taller-grid">
+        <div class="taller-card">
+          <h5>Python Tiene documentación, las personas no</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Francisco Bolivar Castañeda Mora</span>
+            <span><b>Horario:</b> Martes a Viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5>Circuito Cerrado de Videovigilancia</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b>César Martín Hernández</span>
+            <span><b>Horario:</b> Martes a Viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5>Fundamentos de CiberInteligencia</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Gustavo Guzmán Hernández</span>
+            <span><b>Horario:</b> Martes y miércoles, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5>Seduciendo a godot(Diseño de videojuegos)</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Adrián Ramírez Hernández</span>
+            <span><b>Horario:</b> Martes a Viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5>Vibe coding vs Programador IA Agéntica</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Gabriel Celis Maya</span>
+            <span><b>Horario:</b> Martes a Viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5° SEMESTRE -->
+    <div class="tab-panel" id="sem5">
+      <div class="taller-grid">
+        <div class="taller-card">
+          <h5>Building AI Agents with LangChain & LangGraph</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b>Jaime Sebastián Tenorio Rios</span>
+            <span><b>Horario:</b>Martes a Viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5>CFDI 4.0  para Programadores: Estructura y Reglas de Procesamiento</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b>Jesús Antonio Ramírez</span>
+            <span><b>Horario:</b>Martes a jueves, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5>Power BI – Análisis de Datos Avanzado</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Joaquín Salas Hernández</span>
+            <span><b>Horario:</b> Martes a viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7° SEMESTRE -->
+    <div class="tab-panel" id="sem7">
+      <div class="taller-grid">
+        <div class="taller-card">
+          <h5>Sistemas Expertos</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Bruno López Takeyas</span>
+            <span><b>Horario:</b> Martes a viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5> Desarrollo de APIs con Nest.js: de la creación hasta el despliegue.</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Joel Maldonado Canche</span>
+            <span><b>Horario:</b> Martes a viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9° SEMESTRE -->
+    <div class="tab-panel" id="sem9">
+      <div class="taller-grid">
+        <div class="taller-card">
+          <h5>(Aduanas, pedimentos, clasificación arancelaria, etc.)</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b>Jesús Alejadro Mancilla</span>
+            <span><b>Horario:</b> Martes a viernes, 8:00 AM - 12:00 PM</span>
+          </div>
+        </div>
+        <div class="taller-card">
+          <h5>Ingeniero 360: Salud, Dinero y Éxito con ChatGPT</h5>
+          <div class="taller-meta">
+            <span><b>Instructor:</b> Alan Miguel Ordoñes Gomez</span>
+            <span><b>Horario:</b> Martes a viernes, 4:00 PM - 7:00 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="thread-divider container"></div>
+
+<!-- ============================================================
+     EXPERIENCIA Y RIFAS
+     ============================================================ -->
+<section id="experiencia">
+  <div class="container">
+    <span class="eyebrow">Detrás del código</span>
+    <h2 class="section-title">Experiencia y rifas</h2>
+    <p class="section-sub">Porque un simposio también se vive fuera de las conferencias. Explora las actividades de la semana.</p>
+
+    <!-- Contenedor Principal: Galería Interactiva + Tarjeta de Detalles -->
+    <div class="events-interactive-wrapper">
+      
+      <!-- Carrusel / Galería de Imágenes de Eventos -->
+      <div class="events-gallery">
+        <h3 class="gallery-subtitle">Selecciona un evento para ver detalles</h3>
+        
+        <div class="events-grid-carousel">
+          <!-- Evento 1 -->
+          <div class="event-card-thumb active" onclick="showEventDetails(1)" data-event="1">
+            <img src="imagenes/100 sistematicos.jpeg" alt="Torneo de videojuegos">
+            <div class="thumb-overlay">
+              <span>🎮 Torneo de super smash</span>
+            </div>
+          </div>
+
+          <!-- Evento 2 -->
+          <div class="event-card-thumb" onclick="showEventDetails(2)" data-event="2">
+            <img src="imagenes/talento.jpeg" alt="Show de comedia">
+            <div class="thumb-overlay">
+              <span>🎤 Sistemas tiene talento</span>
+            </div>
+          </div>
+
+          <!-- Evento 3 -->
+          <div class="event-card-thumb" onclick="showEventDetails(3)" data-event="3">
+            <img src="imagenes/100 sistematicos.jpeg" alt="Noche de Talentos y Música">
+            <div class="thumb-overlay">
+              <span>🎧 100 sistematicos</span>
+            </div>
+          </div>
+
+          <!-- Evento 4 (Rifas / Premios) -->
+          <div class="event-card-thumb" onclick="showEventDetails(4)" data-event="4">
+            <img src="imagenes/loteria.jpeg" alt="Gran Rifa Synectis">
+            <div class="thumb-overlay">
+              <span>🎁 Loteria sistematica</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel de Datos Generales del Evento Seleccionado -->
+      <div class="event-details-card" id="eventDetailsPanel">
+        <div class="event-badge" id="eventBadge">Actividad Destacada</div>
+        <h3 class="event-title-display" id="eventTitle">Torneo de Videojuegos E-Sports</h3>
+        <p class="event-desc-display" id="eventDesc">
+          Demuestra tus habilidades en el torneo relámpago de la semana. Competencias en títulos populares con premios sorpresa para los mejores competidores de la edición.
+        </p>
+
+        <div class="event-meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">📅 Fecha:</span>
+            <span class="meta-val" id="eventDate">Miércoles 11 de Noviembre</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">⏰ Hora:</span>
+            <span class="meta-val" id="eventTime">16:00 hrs</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">📍 Sede:</span>
+            <span class="meta-val" id="eventLocation">Laboratorio de Redes / Auditorio</span>
+          </div>
+        </div>
+
+        <div class="event-action-footer">
+          <button type="button" class="btn btn-primary btn-small" data-open-modal="registro">Inscribirme al evento</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sección de Rifas (Opcional mantenida como apoyo) -->
+    <div class="raffle-card mt-8">
+      <span class="raffle-label">Destacado de la rifa</span>
+      <h3 class="raffle-title">Premios mayores Synectis 2026</h3>
+      <div class="raffle-prizes">
+        <div class="prize-row">
+          <span class="prize-name">MacBook Neo 2026</span>
+          <span class="prize-tag">1er lugar</span>
+        </div>
+        <div class="prize-row">
+          <span class="prize-name">iPhone 17</span>
+          <span class="prize-tag">2do lugar</span>
+        </div>
+        <div class="prize-row">
+          <span class="prize-name">Kit Pro para Ingenieros / Gadgets</span>
+          <span class="prize-tag">3er lugar</span>
+        </div>
+      </div>
+      <button type="button" class="btn btn-outline btn-small" data-open-modal="registro">Consultar bases de la rifa</button>
+    </div>
+
+  </div>
+</section>
+
+<div class="thread-divider container"></div>
+
+<section id="itinerario-portal">
+    <div class="container">
+      <span class="eyebrow">Cronograma</span>
+      <h2 class="section-title">Itinerario completo</h2>
+      <p class="section-sub">Consulta el cronograma general del simposio, día por día.</p>
+
+      <div class="itin-tabs" id="portalItinTabs">
+        <button type="button" class="itin-tab-btn active" data-itin-day="pd1">Lun 09</button>
+        <button type="button" class="itin-tab-btn" data-itin-day="pd2">Mar 10</button>
+        <button type="button" class="itin-tab-btn" data-itin-day="pd3">Mié 11</button>
+        <button type="button" class="itin-tab-btn" data-itin-day="pd4">Jue 12</button>
+        <button type="button" class="itin-tab-btn" data-itin-day="pd5">Vie 13</button>
+      </div>
+
+      <div class="itin-day active" data-itin-panel="pd1">
+        <table class="itin-table">
+          <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+          <tbody>
+            <tr><td>7:30 - 8:00 </td><td>Traslado y pase de lista en los camiones y en la entrada del teatro</td><td>Explanada del tec / Teatro de la ciudad</td></tr>
+            <tr><td>8:00 - 9:00</td><td>Inauguración</td><td>Teatro de la ciudad</td></tr>
+            <tr><td>9:00 - 10:30</td><td>Conferencia magistral 1: Ciberinteligencia más allá de la ciberseguridad</td><td>Teatro de la ciudad</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="itin-day" data-itin-panel="pd2">
+        <table class="itin-table">
+          <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+          <tbody>
+            <tr><td><!-- HORA --></td><td><!-- AQUÍ VA LA CONFERENCIA/TALLER DEL DÍA 2 --></td><td><!-- LUGAR --></td></tr>
+            <tr><td><!-- HORA --></td><td><!-- AQUÍ VA OTRA ACTIVIDAD DEL DÍA 2 --></td><td><!-- LUGAR --></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="itin-day" data-itin-panel="pd3">
+        <table class="itin-table">
+          <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+          <tbody>
+            <tr><td><!-- HORA --></td><td><!-- AQUÍ VA LA CONFERENCIA/TALLER DEL DÍA 3 --></td><td><!-- LUGAR --></td></tr>
+            <tr><td><!-- HORA --></td><td><!-- AQUÍ VA OTRA ACTIVIDAD DEL DÍA 3 --></td><td><!-- LUGAR --></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="itin-day" data-itin-panel="pd4">
+        <table class="itin-table">
+          <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+          <tbody>
+            <tr><td><!-- HORA --></td><td><!-- AQUÍ VA LA CONFERENCIA/TALLER DEL DÍA 4 --></td><td><!-- LUGAR --></td></tr>
+            <tr><td><!-- HORA --></td><td>Torneo de videojuegos</td><td><!-- LUGAR --></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="itin-day" data-itin-panel="pd5">
+        <table class="itin-table">
+          <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+          <tbody>
+            <tr><td><!-- HORA --></td><td>Rifa de premios mayores</td><td><!-- LUGAR --></td></tr>
+            <tr><td><!-- HORA --></td><td>Show de comedia</td><td><!-- LUGAR --></td></tr>
+            <tr><td><!-- HORA --></td><td>Clausura</td><td><!-- LUGAR --></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+<!-- ============================================================
+     PATROCINADORES
+     ============================================================ -->
+<section id="patrocinios" class="sponsors-floating-section">
+  <div class="container">
+    <span class="eyebrow">Aliados</span>
+    <h2 class="section-title">Patrocinadores</h2>
+    <p class="section-sub">Empresas e instituciones que hacen posible Synectis 2026.</p>
+
+    <!-- Contenedor con distribución libre sin círculos de fondo -->
+    <div class="floating-sponsors-container">
+      <div class="glow-backdrop"></div>
+
+      <!-- Patrocinador 1 -->
+      <a href="https://elliot-electronics.com/" target="_blank" class="sponsor-item pos-1 float-1" data-name="Elliot Electronics">
+        <img src="imagenes/eliotelectronics-removebg-preview.png" alt="Elliot Electronics">
+        <div class="sponsor-tooltip">Elliot Electronics <span>Visitar sitio ↗</span></div>
+      </a>
+
+      <!-- Patrocinador 2 -->
+      <a href="https://forzanafta.com/services/" target="_blank" class="sponsor-item pos-2 float-2" data-name="Forza">
+        <img src="imagenes/logo-forza-header-sm-removebg-preview (1).png" alt="Forza">
+        <div class="sponsor-tooltip">Forza Transportation <span>Visitar sitio ↗</span></div>
+      </a>
+
+      <!-- Patrocinador 3 -->
+      <a href="https://www.facebook.com/mon.designe" target="_blank" class="sponsor-item pos-3 float-3" data-name="Mün Studio">
+        <img src="imagenes/MON STUDIOXD.png" alt="Mün Studio">
+        <div class="sponsor-tooltip">Mün Studio <span>Visitar sitio ↗</span></div>
+      </a>
+
+      <!-- Puedes agregar más patrocinadores aquí de forma idéntica -->
+      <a href="http://www.dylka.com.mx/" target="_blank" class="sponsor-item pos-4 float-1" data-name="dylK">
+        <img src="imagenes/logo.png.crdownload" alt="Patrocinador">
+        <div class="sponsor-tooltip">Otro Patrocinador <span>Visitar sitio ↗</span></div>
+      </a>
+
+      <a href="https://www.instagram.com/k.olagz/" target="_blank" class="sponsor-item pos-5 float-2" data-name="koalag">
+        <img src="imagenes/koalag.jpeg" alt="koalag">
+        <div class="sponsor-tooltip">Otro Patrocinador <span>Visitar sitio ↗</span></div>
+      </a>
+    </div>
+    
+
+    <div class="sponsor-cta">
+      <a href="documentos/WhatsApp Scan 2026-09-17 at 1.29.26 p. m..pdf" class="btn btn-outline">Descargar Dossier de Patrocinio (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER Y CONTACTO
+     ============================================================ -->
+<footer id="contacto">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <span class="eyebrow">Contacto</span>
+        <h2 class="section-title">Hablemos</h2>
+        <form id="contactForm" novalidate>
+          <div class="form-field" data-field="nombre">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo">
+            <span class="field-error-msg">Por favor escribe tu nombre.</span>
+          </div>
+          <div class="form-field" data-field="correo">
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" name="correo" placeholder="tucorreo@ejemplo.com">
+            <span class="field-error-msg">Escribe un correo válido.</span>
+          </div>
+          <div class="form-field" data-field="mensaje">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="4" placeholder="¿En qué te ayudamos?"></textarea>
+            <span class="field-error-msg">Escribe tu mensaje.</span>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+          <p class="form-status" id="formStatus">¡Gracias! Tu mensaje fue enviado.</p>
+        </form>
+      </div>
+
+      <div class="contact-info">
+        <h3>Comité Estudiantil</h3>
+        <div class="contact-line"><b>Correo:</b>&nbsp; <!-- AQUÍ VA EL CORREO DE CONTACTO --></div>
+        <div class="contact-line"><b>Teléfono:</b>&nbsp; <!-- AQUÍ VA EL TELÉFONO DE CONTACTO --></div>
+        <div class="contact-line"><b>Ubicación:</b>&nbsp; Instituto Tecnológico de Nuevo Laredo</div>
+
+        <div class="social-row">
+          <!-- AQUÍ VAN LOS ENLACES REALES A REDES SOCIALES -->
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="TikTok">TT</a>
+          <a href="#" aria-label="X">X</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 SYNECTIS · Ingeniería en Sistemas Computacionales · Instituto Tecnológico de Nuevo Laredo. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     MODAL DE REGISTRO DE ASISTENTES
+     Se abre al hacer clic en cualquier botón "Registrarme".
+     Contiene 3 pestañas: Datos, Preferencias (talla/staff) e Itinerario.
+     ============================================================ 
+<div class="modal-overlay" id="registroModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Cerrar formulario de registro">✕</button>
+
+    <div class="modal-header">
+      <span class="eyebrow">Registro de asistente</span>
+      <h2 id="modalTitle" class="section-title" style="margin-bottom:6px;">Confirma tu lugar en Synectis 2026</h2>
+      <p class="section-sub" style="margin-bottom:0;">Completa tus datos, elige tus preferencias y revisa el itinerario completo.</p>
+    </div>
+
+    <div class="modal-steps" role="tablist">
+      <button type="button" class="modal-step-btn active" data-step="datos" role="tab" aria-selected="true">1. Datos</button>
+      <button type="button" class="modal-step-btn" data-step="preferencias" role="tab" aria-selected="false">2. Preferencias</button>
+      <button type="button" class="modal-step-btn" data-step="itinerario" role="tab" aria-selected="false">3. Itinerario</button>
+    </div>
+
+    <form id="registroForm" novalidate>
+
+      <!-- PASO 1: DATOS -->
+      <div class="modal-step-panel active" data-step-panel="datos">
+        <div class="form-field" data-field="reg-nombre">
+          <label for="reg-nombre">Nombre completo</label>
+          <input type="text" id="reg-nombre" name="reg-nombre" placeholder="Tu nombre completo">
+          <span class="field-error-msg">Por favor escribe tu nombre.</span>
+        </div>
+        <div class="form-field" data-field="reg-correo">
+          <label for="reg-correo">Correo</label>
+          <input type="email" id="reg-correo" name="reg-correo" placeholder="tucorreo@ejemplo.com">
+          <span class="field-error-msg">Escribe un correo válido.</span>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="reg-carrera">Carrera</label>
+            <!-- AQUÍ PUEDES PRECARGAR OPCIONES SI EL EVENTO ES SOLO PARA SISTEMAS COMPUTACIONALES -->
+            <input type="text" id="reg-carrera" name="reg-carrera" placeholder="Ej. Ing. en Sistemas Computacionales">
+          </div>
+          <div class="form-field">
+            <label for="reg-semestre">Semestre</label>
+            <select id="reg-semestre" name="reg-semestre">
+              <option value="">Selecciona...</option>
+              <option>1°</option>
+              <option>3°</option>
+              <option>5°</option>
+              <option>7°</option>
+              <option>9°</option>
+              <option>Otro / externo</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 2: PREFERENCIAS (talla + postulación a staff) -->
+      <div class="modal-step-panel" data-step-panel="preferencias">
+        <div class="form-field" data-field="reg-talla">
+          <label for="reg-talla">Talla de playera</label>
+          <select id="reg-talla" name="reg-talla">
+            <option value="">Selecciona tu talla...</option>
+            <option>CH</option>
+            <option>M</option>
+            <option>G</option>
+            <option>XG</option>
+            <option>XXG</option>
+          </select>
+          <span class="field-error-msg">Selecciona una talla.</span>
+        </div>
+
+        <div class="staff-toggle">
+          <label class="checkbox-line">
+            <input type="checkbox" id="reg-staff">
+            <span>Quiero postularme como <b>staff</b> del evento</span>
+          </label>
+
+          <!-- Este bloque solo aparece si la persona marca la casilla de arriba -->
+          <div class="staff-extra" id="staffExtra" hidden>
+            <div class="form-field">
+              <label for="reg-area-staff">Área de interés como staff</label>
+              <select id="reg-area-staff" name="reg-area-staff">
+                <option value="">Selecciona un área...</option>
+                <option>Logística</option>
+                <option>Registro y control de acceso</option>
+                <option>Apoyo en talleres</option>
+                <option>Difusión / redes sociales</option>
+                <option>Producción / escenario</option>
+                <!-- AQUÍ PUEDES AGREGAR MÁS ÁREAS DE STAFF -->
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="reg-disponibilidad">Disponibilidad</label>
+              <textarea id="reg-disponibilidad" rows="3" placeholder="Ej. Disponible los 5 días, medio tiempo, solo tardes..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 3: ITINERARIO COMPLETO -->
+      <div class="modal-step-panel" data-step-panel="itinerario">
+        <p class="section-sub" style="margin-bottom:22px;">Este es el itinerario general. La elección específica de talleres se confirma al acreditarte en el evento.</p>
+
+        <div class="itin-tabs" role="tablist">
+          <button type="button" class="itin-tab-btn active" data-itin-day="d1" role="tab" aria-selected="true">Lun 09</button>
+          <button type="button" class="itin-tab-btn" data-itin-day="d2" role="tab" aria-selected="false">Mar 10</button>
+          <button type="button" class="itin-tab-btn" data-itin-day="d3" role="tab" aria-selected="false">Mié 11</button>
+          <button type="button" class="itin-tab-btn" data-itin-day="d4" role="tab" aria-selected="false">Jue 12</button>
+          <button type="button" class="itin-tab-btn" data-itin-day="d5" role="tab" aria-selected="false">Vie 13</button>
+        </div>
+
+        <!-- DÍA 1 -->
+        <div class="itin-day active" data-itin-panel="d1">
+          <table class="itin-table">
+            <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+            <tbody>
+              <tr><td><!-- HORA --></td><td>Inauguración</td><td><!-- LUGAR --></td></tr>
+              <tr><td><!-- HORA --></td><td><!-- AQUÍ VA LA CONFERENCIA/TALLER DEL DÍA 1 --></td><td><!-- LUGAR --></td></tr>
+              <tr><td><!-- HORA --></td><td><!-- AQUÍ VA OTRA ACTIVIDAD DEL DÍA 1 --></td><td><!-- LUGAR --></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- DÍA 2 -->
+        <div class="itin-day" data-itin-panel="d2">
+          <table class="itin-table">
+            <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+            <tbody>
+              <tr><td><!-- HORA --></td><td><!-- AQUÍ VA LA CONFERENCIA/TALLER DEL DÍA 2 --></td><td><!-- LUGAR --></td></tr>
+              <tr><td><!-- HORA --></td><td><!-- AQUÍ VA OTRA ACTIVIDAD DEL DÍA 2 --></td><td><!-- LUGAR --></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- DÍA 3 -->
+        <div class="itin-day" data-itin-panel="d3">
+          <table class="itin-table">
+            <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+            <tbody>
+              <tr><td><!-- HORA --></td><td><!-- AQUÍ VA LA CONFERENCIA/TALLER DEL DÍA 3 --></td><td><!-- LUGAR --></td></tr>
+              <tr><td><!-- HORA --></td><td><!-- AQUÍ VA OTRA ACTIVIDAD DEL DÍA 3 --></td><td><!-- LUGAR --></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- DÍA 4 -->
+        <div class="itin-day" data-itin-panel="d4">
+          <table class="itin-table">
+            <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+            <tbody>
+              <tr><td><!-- HORA --></td><td><!-- AQUÍ VA LA CONFERENCIA/TALLER DEL DÍA 4 --></td><td><!-- LUGAR --></td></tr>
+              <tr><td><!-- HORA --></td><td>Torneo de videojuegos</td><td><!-- LUGAR --></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- DÍA 5 -->
+        <div class="itin-day" data-itin-panel="d5">
+          <table class="itin-table">
+            <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+            <tbody>
+              <tr><td><!-- HORA --></td><td>Rifa de premios mayores</td><td><!-- LUGAR --></td></tr>
+              <tr><td><!-- HORA --></td><td>Show de comedia</td><td><!-- LUGAR --></td></tr>
+              <tr><td><!-- HORA --></td><td>Clausura</td><td><!-- LUGAR --></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Confirmar registro</button>
+      </div>
+    </form>
+
+    <p class="form-status" id="regFormStatus"></p>
+  </div>
+</div-->
+
+<script src="js/bg-interactive.js" defer></script>
+<script src="js/script.js" defer></script>
+</body>
+</html>

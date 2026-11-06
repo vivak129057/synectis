@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal del Asistente · SYNECTIS 2026</title>
+<meta name="description" content="Portal privado de asistentes de SYNECTIS 2026 — Instituto Tecnológico de Nuevo Laredo">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<canvas class="bg-canvas" id="bgCanvas" aria-hidden="true"></canvas>
+<div class="bg-vignette" aria-hidden="true"></div>
+<div class="crt-overlay" aria-hidden="true"></div>
+
+<!-- ============================================================
+     "CANDADO" DE ACCESO
+     Se muestra un instante mientras portal.js verifica que exista
+     un registro guardado (localStorage). Si no existe, se redirige
+     de vuelta a index.html — este es el "acceso secreto".
+     ============================================================ -->
+<div class="access-gate" id="accessGate">
+  <div>
+    <span class="eyebrow">Verificando acceso</span>
+    <p>Estamos confirmando tu registro para abrir tu portal de asistente...</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     NAVBAR DEL PORTAL
+     ============================================================ -->
+<header class="navbar scrolled" id="portalNavbar">
+  <div class="container nav-inner">
+    <a href="portal.html" class="nav-logo">
+      <!-- AQUÍ VA EL LOGO DEL EVENTO (mismo que en index.html) -->
+      <img src="assets/img/logo.png" alt="Logo SYNECTIS 2026" onerror="this.style.visibility='hidden'">
+      SYNECTIS 2026 · Portal
+    </a>
+
+    <nav class="nav-links">
+      <a href="#bienvenida">Inicio</a>
+      <a href="#perfil">Mi perfil</a>
+      <a href="#actividades">Actividades</a>
+      <a href="#talleres-portal">Talleres</a>
+      <a href="#itinerario-portal">Itinerario</a>
+    </nav>
+
+    <button type="button" class="btn btn-outline btn-small nav-cta" id="logoutBtn">Cerrar sesión</button>
+    <button class="nav-toggle" id="portalNavToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </div>
+
+  <div class="mobile-menu" id="portalMobileMenu">
+    <a href="#bienvenida">Inicio</a>
+    <a href="#perfil">Mi perfil</a>
+    <a href="#actividades">Actividades</a>
+    <a href="#talleres-portal">Talleres</a>
+    <a href="#itinerario-portal">Itinerario</a>
+    <button type="button" class="btn btn-outline btn-small" id="logoutBtnMobile" style="align-self:flex-start;">Cerrar sesión</button>
+  </div>
+</header>
+
+<main style="padding-top:120px;">
+
+  <!-- ============================================================
+       BIENVENIDA + RESUMEN DE REGISTRO
+       ============================================================ -->
+  <section id="bienvenida">
+    <div class="container">
+      <span class="eyebrow">Acceso de asistente</span>
+      <h1 class="section-title" id="welcomeTitle">Hola 👋</h1>
+      <p class="section-sub">
+        Este es tu portal privado de SYNECTIS 2026. Aquí puedes confirmar tu talla,
+        postularte como staff, elegir tus actividades y talleres, y consultar el itinerario completo.
+      </p>
+
+      <div class="profile-summary" id="profileSummary">
+        <!-- Se llena dinámicamente vía JS con los datos guardados del registro -->
+      </div>
+    </div>
+  </section>
+
+  <div class="thread-divider container"></div>
+
+  <!-- ============================================================
+       MI PERFIL — TALLA Y POSTULACIÓN A STAFF
+       ============================================================ -->
+  <section id="perfil">
+    <div class="container">
+      <span class="eyebrow">Mi perfil</span>
+      <h2 class="section-title">Talla y postulación a staff</h2>
+      <p class="section-sub">Puedes actualizar esta información cuando quieras antes del evento.</p>
+
+      <form id="profileForm" novalidate style="max-width:640px;">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="p-talla">Talla de playera</label>
+            <select id="p-talla">
+              <option value="">Selecciona tu talla...</option>
+              <option>CH</option>
+              <option>M</option>
+              <option>G</option>
+              <option>XG</option>
+              <option>XXG</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="p-semestre">Semestre</label>
+            <select id="p-semestre">
+              <option value="">Selecciona...</option>
+              <option>1°</option>
+              <option>3°</option>
+              <option>5°</option>
+              <option>7°</option>
+              <option>9°</option>
+              <option>Otro / externo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="staff-toggle">
+          <label class="checkbox-line">
+            <input type="checkbox" id="p-staff">
+            <span>Quiero postularme como <b>staff</b> del evento</span>
+          </label>
+
+          <div class="staff-extra" id="pStaffExtra" hidden>
+            <div class="form-field">
+              <label for="p-area-staff">Área de interés como staff</label>
+              <select id="p-area-staff">
+                <option value="">Selecciona un área...</option>
+                <option>Logística</option>
+                <option>Registro y control de acceso</option>
+                <option>Apoyo en talleres</option>
+                <option>Difusión / redes sociales</option>
+                <option>Producción / escenario</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="p-disponibilidad">Disponibilidad</label>
+              <textarea id="p-disponibilidad" rows="3" placeholder="Ej. Disponible los 5 días, medio tiempo, solo tardes..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <p class="form-status" id="profileStatus"></p>
+      </form>
+    </div>
+  </section>
+
+  <div class="thread-divider container"></div>
+
+  <!-- ============================================================
+       ACTIVIDADES — SELECCIÓN
+       ============================================================ -->
+  <section id="actividades">
+    <div class="container">
+      <span class="eyebrow">Detrás del código</span>
+      <h2 class="section-title">Elige tus actividades</h2>
+      <p class="section-sub">Selecciona a cuáles te gustaría asistir. Puedes cambiar tu selección cuando quieras.</p>
+
+      <div class="select-grid cols-3" id="actividadesGrid">
+        <label class="select-card">
+          <input type="checkbox" name="actividad" value="torneo">
+          <div class="select-card-body">
+            <span class="select-card-icon">🎮</span>
+            <h4>Torneo de videojuegos</h4>
+            <p><!-- AQUÍ VA LA DESCRIPCIÓN DEL TORNEO --></p>
+          </div>
+          <span class="select-card-check">✓</span>
+        </label>
+
+        <label class="select-card">
+          <input type="checkbox" name="actividad" value="comedia">
+          <div class="select-card-body">
+            <span class="select-card-icon">🎤</span>
+            <h4>Show de comedia</h4>
+            <p><!-- AQUÍ VA LA DESCRIPCIÓN DEL SHOW --></p>
+          </div>
+          <span class="select-card-check">✓</span>
+        </label>
+
+        <label class="select-card">
+          <input type="checkbox" name="actividad" value="rifa">
+          <div class="select-card-body">
+            <span class="select-card-icon">🎁</span>
+            <h4>Rifa de premios mayores</h4>
+            <p>MacBook Neo 2026, iPhone 17 <!-- AQUÍ PUEDES AGREGAR MÁS PREMIOS --></p>
+          </div>
+          <span class="select-card-check">✓</span>
+        </label>
+      </div>
+
+      <button type="button" class="btn btn-primary btn-small" id="saveActividades">Guardar selección</button>
+      <p class="form-status" id="actividadesStatus"></p>
+    </div>
+  </section>
+
+  <div class="thread-divider container"></div>
+
+  <!-- ============================================================
+       TALLERES — SELECCIÓN POR SEMESTRE
+       ============================================================ -->
+  <section id="talleres-portal">
+    <div class="container">
+      <span class="eyebrow">Práctica</span>
+      <h2 class="section-title">Elige tus talleres</h2>
+      <p class="section-sub">Filtra por semestre y marca los talleres a los que asistirás.</p>
+
+      <div class="tabs-bar" id="portalTabsBar">
+        <button type="button" class="tab-btn active" data-tab="psem1">1° Semestre</button>
+        <button type="button" class="tab-btn" data-tab="psem3">3° Semestre</button>
+        <button type="button" class="tab-btn" data-tab="psem5">5° Semestre</button>
+        <button type="button" class="tab-btn" data-tab="psem7">7° Semestre</button>
+        <button type="button" class="tab-btn" data-tab="psem9">9° Semestre</button>
+      </div>
+
+      <!-- 1° SEMESTRE -->
+      <div class="tab-panel active" id="psem1">
+        <div class="taller-grid">
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="1-1">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 1.1 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="1-2">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 1.2 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="1-3">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 1.3 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 3° SEMESTRE -->
+      <div class="tab-panel" id="psem3">
+        <div class="taller-grid">
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="3-1">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 3.1 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="3-2">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 3.2 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="3-3">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 3.3 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 5° SEMESTRE -->
+      <div class="tab-panel" id="psem5">
+        <div class="taller-grid">
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="5-1">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 5.1 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="5-2">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 5.2 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="5-3">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 5.3 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 7° SEMESTRE -->
+      <div class="tab-panel" id="psem7">
+        <div class="taller-grid">
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="7-1">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 7.1 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="7-2">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 7.2 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="7-3">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 7.3 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 9° SEMESTRE -->
+      <div class="tab-panel" id="psem9">
+        <div class="taller-grid">
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="9-1">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 9.1 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="9-2">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 9.2 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+          <label class="taller-card selectable">
+            <input type="checkbox" name="taller" value="9-3">
+            <h5><!-- AQUÍ VA EL TÍTULO DEL TALLER 9.3 --></h5>
+            <div class="taller-meta">
+              <span><b>Instructor:</b> <!-- NOMBRE --></span>
+              <span><b>Horario:</b> <!-- HORARIO --></span>
+            </div>
+            <span class="taller-check"></span>
+          </label>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary btn-small" id="saveTalleres" style="margin-top:26px;">Guardar mis talleres</button>
+      <p class="form-status" id="talleresStatus"></p>
+    </div>
+  </section>
+
+  <div class="thread-divider container"></div>
+
+  <!-- ============================================================
+       ITINERARIO COMPLETO
+       ============================================================ -->
+  <section id="itinerario-portal">
+    <div class="container">
+      <span class="eyebrow">Cronograma</span>
+      <h2 class="section-title">Itinerario completo</h2>
+      <p class="section-sub">Consulta el cronograma general del simposio, día por día.</p>
+
+      <div class="itin-tabs" id="portalItinTabs">
+        <button type="button" class="itin-tab-btn active" data-itin-day="pd1">Lun 09</button>
+        <button type="button" class="itin-tab-btn" data-itin-day="pd2">Mar 10</button>
+        <button type="button" class="itin-tab-btn" data-itin-day="pd3">Mié 11</button>
+        <button type="button" class="itin-tab-btn" data-itin-day="pd4">Jue 12</button>
+        <button type="button" class="itin-tab-btn" data-itin-day="pd5">Vie 13</button>
+      </div>
+
+      <div class="itin-day active" data-itin-panel="pd1">
+        <table class="itin-table">
+          <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+          <tbody>
+            <tr><td><!-- HORA --></td><td>Inauguración</td><td><!-- LUGAR --></td></tr>
+            <tr><td><!-- HORA --></td><td><!-- AQUÍ VA LA CONFERENCIA/TALLER DEL DÍA 1 --></td><td><!-- LUGAR --></td></tr>
+            <tr><td><!-- HORA --></td><td><!-- AQUÍ VA OTRA ACTIVIDAD DEL DÍA 1 --></td><td><!-- LUGAR --></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="itin-day" data-itin-panel="pd2">
+        <table class="itin-table">
+          <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+          <tbody>
+            <tr><td><!-- HORA --></td><td><!-- AQUÍ VA LA CONFERENCIA/TALLER DEL DÍA 2 --></td><td><!-- LUGAR --></td></tr>
+            <tr><td><!-- HORA --></td><td><!-- AQUÍ VA OTRA ACTIVIDAD DEL DÍA 2 --></td><td><!-- LUGAR --></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="itin-day" data-itin-panel="pd3">
+        <table class="itin-table">
+          <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+          <tbody>
+            <tr><td><!-- HORA --></td><td><!-- AQUÍ VA LA CONFERENCIA/TALLER DEL DÍA 3 --></td><td><!-- LUGAR --></td></tr>
+            <tr><td><!-- HORA --></td><td><!-- AQUÍ VA OTRA ACTIVIDAD DEL DÍA 3 --></td><td><!-- LUGAR --></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="itin-day" data-itin-panel="pd4">
+        <table class="itin-table">
+          <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+          <tbody>
+            <tr><td><!-- HORA --></td><td><!-- AQUÍ VA LA CONFERENCIA/TALLER DEL DÍA 4 --></td><td><!-- LUGAR --></td></tr>
+            <tr><td><!-- HORA --></td><td>Torneo de videojuegos</td><td><!-- LUGAR --></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="itin-day" data-itin-panel="pd5">
+        <table class="itin-table">
+          <thead><tr><th>Hora</th><th>Actividad / Taller</th><th>Lugar</th></tr></thead>
+          <tbody>
+            <tr><td><!-- HORA --></td><td>Rifa de premios mayores</td><td><!-- LUGAR --></td></tr>
+            <tr><td><!-- HORA --></td><td>Show de comedia</td><td><!-- LUGAR --></td></tr>
+            <tr><td><!-- HORA --></td><td>Clausura</td><td><!-- LUGAR --></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer style="padding:60px 0 0;">
+  <div class="container footer-bottom" style="margin-top:0;">
+    © 2026 SYNECTIS · Ingeniería en Sistemas Computacionales · Instituto Tecnológico de Nuevo Laredo. Todos los derechos reservados.
+  </div>
+</footer>
+
+<script src="js/bg-interactive.js" defer></script>
+<script src="js/portal.js" defer></script>
+</body>
+</html>

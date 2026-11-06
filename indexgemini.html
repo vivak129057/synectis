@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SYNECTIS 2026 | Diseñando el Mañana</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. VARIABLES GLOBALES
+       ========================================================================== */
+    :root {
+      --bg-tarjeta: rgba(10, 15, 29, 0.75);
+      --color-acento-cian: #38bdf8;
+      --color-acento-magenta: #d946ef;
+      --color-texto: #f8fafc;
+      --color-texto-mutado: #94a3b8;
+      --borde-tarjeta: rgba(56, 189, 248, 0.25);
+      --fuente: 'Montserrat', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--fuente);
+      color: var(--color-texto);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-color: #050811;
+    }
+
+    /* ==========================================================================
+       2. VIDEO 3D COMO FONDO COMPLETO (FULLSCREEN BACKGROUND)
+       ========================================================================== */
+    .video-fondo-contenedor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1; /* Queda detrás de todo el contenido */
+      overflow: hidden;
+    }
+
+    #video-fondo-3d {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Cubre toda la pantalla sin distorsionarse */
+      filter: brightness(0.65) contrast(1.1); /* Ajuste sutil para resaltar los textos encima */
+    }
+
+    /* Oscurecedor progresivo para que las tarjetas se lean perfecto */
+    .capa-oscura-fondo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at center, rgba(5, 8, 17, 0.3) 0%, rgba(5, 8, 17, 0.85) 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       3. NAVEGACIÓN
+       ========================================================================== */
+    .header-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 0.8rem 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(5, 8, 17, 0.7);
+      backdrop-filter: blur(16px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--borde-tarjeta);
+    }
+
+    .logo-contenedor {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-vector {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo-texto {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      color: var(--color-texto);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-texto-mutado);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--color-acento-cian); }
+
+    .btn-registrarse-nav {
+      background: linear-gradient(135deg, var(--color-acento-cian), var(--color-acento-magenta));
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-registrarse-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
+    }
+
+    /* ==========================================================================
+       4. SECCIÓN HERO (PORTADA LIMPIA SOBRE EL FONDO 3D)
+       ========================================================================== */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 6% 4rem;
+      position: relative;
+    }
+
+    .tag-simposio {
+      color: var(--color-acento-cian);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+    }
+
+    .hero-titulo {
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero-subtitulo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.8rem;
+      color: var(--color-acento-magenta);
+      text-shadow: 0 0 15px rgba(217, 70, 239, 0.5);
+    }
+
+    .hero-meta-info {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(10, 15, 29, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--borde-tarjeta);
+      padding: 0.6rem 1.4rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      color: var(--color-texto-mutado);
+      margin-bottom: 2rem;
+    }
+
+    .btn-principal {
+      background: linear-gradient(135deg, var(--color-acento-cian), var(--color-acento-magenta));
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-principal:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 30px rgba(56, 189, 248, 0.7);
+    }
+
+    .indicador-scroll {
+      position: absolute;
+      bottom: 25px;
+      font-size: 0.75rem;
+      color: var(--color-acento-cian);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      animation: rebotar 2s infinite;
+    }
+
+    @keyframes rebotar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ==========================================================================
+       5. SECCIONES CON CRISTAL TRANSMUTADO (GLASSMORPHISM)
+       ========================================================================== */
+    .contenedor-seccion { padding: 6rem 8%; }
+
+    .tag-seccion {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--color-acento-cian);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .tag-seccion::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background-color: var(--color-acento-cian);
+      box-shadow: 0 0 8px var(--color-acento-cian);
+    }
+
+    .titulo-seccion {
+      font-size: 2.3rem;
+      font-weight: 800;
+      margin-bottom: 2.5rem;
+    }
+
+    .grid-concepto, .grid-ejes { display: grid; gap: 1.5rem; }
+    .grid-concepto { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .grid-ejes { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+    .card-concepto, .card-eje {
+      background: var(--bg-tarjeta);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--borde-tarjeta);
+      padding: 2rem;
+      border-radius: 16px;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-concepto:hover, .card-eje:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-acento-cian);
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2);
+    }
+
+    .card-concepto .num {
+      border: 1px solid var(--color-acento-cian);
+      color: var(--color-acento-cian);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .card-eje .eje-tag {
+      color: var(--color-acento-magenta);
+      font-size: 0.75rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    /* ==========================================================================
+       6. TALLERES ESPECIALIZADOS
+       ========================================================================== */
+    .contenedor-carrusel {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      background: rgba(5, 8, 17, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--borde-tarjeta);
+    }
+
+    .lista-talleres { width: 100%; height: 100%; position: relative; }
+
+    .tarjeta-taller {
+      width: 200px;
+      height: 280px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 14px;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), left 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+      will-change: transform, left, opacity;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .tarjeta-taller:nth-child(1) {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: translateY(0);
+      border-radius: 0;
+    }
+
+    .tarjeta-taller:nth-child(1)::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(5, 8, 17, 0.95) 0%, rgba(5, 8, 17, 0.75) 50%, rgba(5, 8, 17, 0.2) 100%);
+    }
+
+    .tarjeta-taller:nth-child(2) { left: 55%; }
+    .tarjeta-taller:nth-child(3) { left: calc(55% + 220px); }
+    .tarjeta-taller:nth-child(4) { left: calc(55% + 440px); }
+    .tarjeta-taller:nth-child(n+5) { left: calc(55% + 660px); opacity: 0; }
+
+    .contenido-taller {
+      position: absolute;
+      top: 50%;
+      left: 6%;
+      transform: translateY(-50%);
+      width: 42%;
+      display: none;
+      z-index: 10;
+    }
+
+    .tarjeta-taller:nth-child(1) .contenido-taller {
+      display: block;
+      animation: aparecerTexto 0.4s ease-out forwards;
+    }
+
+    .etiqueta-instructor {
+      color: var(--color-acento-cian);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .titulo-taller { font-size: 2.2rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
+    .descripcion-taller { color: var(--color-texto-mutado); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+    .botones-navegacion {
+      position: absolute;
+      bottom: 25px;
+      left: 6%;
+      z-index: 20;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-control {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--borde-tarjeta);
+      background: rgba(10, 15, 29, 0.8);
+      color: var(--color-texto);
+      font-size: 1.2rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s;
+    }
+
+    .btn-control:hover {
+      background: var(--color-acento-cian);
+      box-shadow: 0 0 15px var(--color-acento-cian);
+    }
+
+    /* ==========================================================================
+       7. MODAL DE REGISTRO
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(5, 8, 17, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.activo { opacity: 1; pointer-events: auto; }
+
+    .modal-contenedor {
+      background: #090e1a;
+      border: 1px solid var(--color-acento-cian);
+      width: 90%;
+      max-width: 600px;
+      border-radius: 16px;
+      padding: 2.5rem;
+      position: relative;
+      box-shadow: 0 0 50px rgba(56, 189, 248, 0.3);
+    }
+
+    .btn-cerrar-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: var(--color-texto-mutado);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .pestanas-modal {
+      display: flex;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      border-bottom: 1px solid var(--borde-tarjeta);
+      padding-bottom: 0.8rem;
+    }
+
+    .btn-pestana {
+      background: transparent;
+      border: none;
+      color: var(--color-texto-mutado);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+    }
+
+    .btn-pestana.activa {
+      background: rgba(56, 189, 248, 0.2);
+      color: var(--color-acento-cian);
+    }
+
+    .contenido-pestana { display: none; flex-direction: column; gap: 1rem; }
+    .contenido-pestana.activa { display: flex; }
+
+    .input-estilo {
+      background: rgba(5, 8, 17, 0.8);
+      border: 1px solid var(--borde-tarjeta);
+      color: var(--color-texto);
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .input-estilo:focus { border-color: var(--color-acento-cian); }
+
+    @media (max-width: 768px) {
+      .hero-titulo { font-size: 2.2rem; }
+      .nav-links { display: none; }
+      .tarjeta-taller:nth-child(2), .tarjeta-taller:nth-child(3), .tarjeta-taller:nth-child(4) { display: none; }
+      .contenido-taller { width: 85%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FONDO DE VIDEO 3D FULLSCREEN + CAPA OSCURA -->
+  <div class="video-fondo-contenedor">
+    <video id="video-fondo-3d" muted playsinline preload="auto">
+      <source src="C:\Users\Gabo\Downloads\synectis-2026\assets\video\Animacin de Logotipo 3D_0p.mp4" type="video/mp4">
+      Tu navegador no soporta el video.
+    </video>
+  </div>
+  <div class="capa-oscura-fondo"></div>
+
+  <!-- NAVEGACIÓN -->
+  <header class="header-nav">
+    <a href="#inicio" class="logo-contenedor">
+      <img src="C:\Users\Gabo\Downloads\synectis-2026\assets\img\ISC LOGO-01 (1).png" alt="Logo SYNECTIS" class="logo-vector">
+      <span class="logo-texto">SYNECTIS 2026</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#ejes">Ejes</a></li>
+      <li><a href="#talleres">Talleres</a></li>
+    </ul>
+    <a href="#" class="btn-registrarse-nav btn-abrir-modal">Registrarme</a>
+  </header>
+
+  <!-- 1. PORTADA HERO -->
+  <section id="inicio" class="hero-section">
+    <p class="tag-simposio">XXXIII SIMPOSIUM · INGENIERÍA EN SISTEMAS COMPUTACIONALES</p>
+    <h1 class="hero-titulo">XXXIII Simposium de Ingeniería en Sistemas Computacionales</h1>
+    <p class="hero-subtitulo">"SYNECTIS: Diseñando el mañana"</p>
+    
+    <div class="hero-meta-info">
+      📅 <strong>09 al 13 de Noviembre de 2026</strong> | Instituto Tecnológico de Nuevo Laredo
+    </div>
+
+    <button class="btn-principal btn-abrir-modal">Comprar Boleto / Registrarme</button>
+    
+    <div class="indicador-scroll">↓ Desliza para ensamblar el logo en el fondo ↓</div>
+  </section>
+
+  <!-- 2. ¿QUÉ ES SYNECTIS? -->
+  <section class="contenedor-seccion">
+    <div class="tag-seccion">EL CONCEPTO</div>
+    <h2 class="titulo-seccion">¿Qué es Synectis?</h2>
+    
+    <div class="grid-concepto">
+      <div class="card-concepto">
+        <span class="num">01</span>
+        <h3>Significado</h3>
+        <p>Proviene del concepto de "sinéctica", la unión de elementos distintos e aparentemente irrelevantes para crear nuevas soluciones e innovaciones tecnológicas.</p>
+      </div>
+      <div class="card-concepto">
+        <span class="num">02</span>
+        <h3>Propósito</h3>
+        <p>Impulsar el desarrollo académico, práctico y profesional mediante conferencias magistrales y talleres prácticos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. EJES TEMÁTICOS -->
+  <section id="ejes" class="contenedor-seccion">
+    <div class="tag-seccion">CONTENIDO ACADÉMICO</div>
+    <h2 class="titulo-seccion">Ejes temáticos</h2>
+    
+    <div class="grid-ejes">
+      <div class="card-eje"><span class="eje-tag">EJE 01</span><h4>El futuro de la ingeniería creativa</h4></div>
+      <div class="card-eje"><span class="eje-tag">EJE 02</span><h4>Ciberseguridad empresarial</h4></div>
+      <div class="card-eje"><span class="eje-tag">EJE 03</span><h4>El ingeniero como arquitecto de la sociedad</h4></div>
+      <div class="card-eje"><span class="eje-tag">EJE 04</span><h4>Ciberseguridad forense</h4></div>
+      <div class="card-eje"><span class="eje-tag">EJE 05</span><h4>Liderazgo disruptivo y el potencial de las nuevas generaciones</h4></div>
+    </div>
+  </section>
+
+  <!-- 4. TALLERES ESPECIALIZADOS -->
+  <section id="talleres" class="contenedor-seccion">
+    <div class="tag-seccion">PRÁCTICA</div>
+    <h2 class="titulo-seccion">Talleres Especializados</h2>
+
+    <div class="contenedor-carrusel">
+      <div class="lista-talleres">
+        <div class="tarjeta-taller" style="background-image: url('https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80');">
+          <div class="contenido-taller">
+            <span class="etiqueta-instructor">Tallerista: Ing. Ana Martínez</span>
+            <h3 class="titulo-taller">Desarrollo IoT e Industria 4.0</h3>
+            <p class="descripcion-taller">Conecta sensores a la nube, procesa datos en tiempo real y construye tu primer prototipo funcional.</p>
+            <button class="btn-principal btn-abrir-modal">Inscribirme al Taller</button>
+          </div>
+        </div>
+
+        <div class="tarjeta-taller" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80');">
+          <div class="contenido-taller">
+            <span class="etiqueta-instructor">Tallerista: Dr. Carlos Ramos</span>
+            <h3 class="titulo-taller">Ciberseguridad Práctica</h3>
+            <p class="descripcion-taller">Análisis de vulnerabilidades, pruebas de penetración y aseguramiento de aplicaciones web.</p>
+            <button class="btn-principal btn-abrir-modal">Inscribirme al Taller</button>
+          </div>
+        </div>
+
+        <div class="tarjeta-taller" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80');">
+          <div class="contenido-taller">
+            <span class="etiqueta-instructor">Tallerista: Mtra. Sofía Gómez</span>
+            <h3 class="titulo-taller">Inteligencia Artificial Aplicada</h3>
+            <p class="descripcion-taller">Introducción al entrenamiento de modelos de Machine Learning e integración en APIs.</p>
+            <button class="btn-principal btn-abrir-modal">Inscribirme al Taller</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="botones-navegacion">
+        <button id="btn-anterior" class="btn-control">&lt;</button>
+        <button id="btn-siguiente" class="btn-control">&gt;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL DE REGISTRO FLOTANTE -->
+  <div id="modal-registro" class="modal-overlay">
+    <div class="modal-contenedor">
+      <button class="btn-cerrar-modal">&times;</button>
+      <div class="tag-seccion">REGISTRO DE ASISTENTE</div>
+      <h2 style="font-size: 1.4rem; margin-top: 0.2rem; margin-bottom: 1rem;">Confirma tu lugar en Synectis 2026</h2>
+      
+      <div class="pestanas-modal">
+        <button class="btn-pestana activa" onclick="cambiarPestana('pestana-datos', this)">1. Datos</button>
+        <button class="btn-pestana" onclick="cambiarPestana('pestana-pref', this)">2. Preferencias</button>
+      </div>
+
+      <div id="pestana-datos" class="contenido-pestana activa">
+        <input type="text" class="input-estilo" placeholder="Tu nombre completo">
+        <input type="email" class="input-estilo" placeholder="tucorreo@ejemplo.com">
+      </div>
+
+      <div id="pestana-pref" class="contenido-pestana">
+        <select class="input-estilo">
+          <option>Selecciona tu talla de playera...</option>
+          <option>Chica (S)</option>
+          <option>Mediana (M)</option>
+          <option>Grande (L)</option>
+        </select>
+      </div>
+
+      <button class="btn-principal" style="width: 100%; margin-top: 1.5rem;">Confirmar registro</button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT: CONTROL DEL VIDEO DE FONDO CON EL SCROLL GENERAL DE LA PÁGINA -->
+  <script>
+    const videoFondo = document.getElementById('video-fondo-3d');
+
+    // Sincronizar el tiempo del video con la altura total deslizada
+    function controlarVideoConScroll() {
+      const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollActual = window.scrollY;
+      
+      // Proporción de scroll de 0 a 1
+      const progreso = Math.min(1, Math.max(0, scrollActual / scrollMax));
+
+      if (videoFondo.duration) {
+        // Actualizamos los cuadros del video de fondo según qué tanto bajas en la página
+        videoFondo.currentTime = videoFondo.duration * progreso;
+      }
+    }
+
+    videoFondo.addEventListener('loadedmetadata', () => {
+      window.addEventListener('scroll', controlarVideoConScroll);
+    });
+
+    // CARRUSEL DE TALLERES
+    const btnSiguiente = document.getElementById('btn-siguiente');
+    const btnAnterior = document.getElementById('btn-anterior');
+    const listaTalleres = document.querySelector('.lista-talleres');
+
+    btnSiguiente.addEventListener('click', () => {
+      const items = document.querySelectorAll('.tarjeta-taller');
+      listaTalleres.appendChild(items[0]);
+    });
+
+    btnAnterior.addEventListener('click', () => {
+      const items = document.querySelectorAll('.tarjeta-taller');
+      listaTalleres.prepend(items[items.length - 1]);
+    });
+
+    // MODAL DE REGISTRO
+    const modal = document.getElementById('modal-registro');
+    document.querySelectorAll('.btn-abrir-modal').forEach(btn => {
+      btn.addEventListener('click', (e) => { e.preventDefault(); modal.classList.add('activo'); });
+    });
+    document.querySelector('.btn-cerrar-modal').addEventListener('click', () => modal.classList.remove('activo'));
+
+    function cambiarPestana(idPestana, elementoBtn) {
+      document.querySelectorAll('.contenido-pestana').forEach(p => p.classList.remove('activa'));
+      document.querySelectorAll('.btn-pestana').forEach(b => b.classList.remove('activa'));
+      document.getElementById(idPestana).classList.add('activa');
+      elementoBtn.classList.add('activa');
+    }
+  </script>
+</body>
+</html>
