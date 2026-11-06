@@ -352,12 +352,12 @@ registroForm.addEventListener('submit', (e) => {
 
 const eventsData = {
   1: {
-    badge: "Competencia E-Sports",
+    badge: "Torneo de videojuegos",
     title: "Torneo de super smash",
-    desc: "Demuestra tus habilidades en el torneo relámpago de la semana. Competencias en títulos multijugador con enfrentamientos directos y sorpresas para los finalistas.",
+    desc: "Demuestra tus habilidades en el torneo relámpago de la semana. Competencias con enfrentamientos directos y sorpresas para los finalistas.",
     date: "Viernes 13 de Noviembre",
     time: "12:00 hrs",
-    location: "pendiente de confirmación"
+    location: "Edificio rojo"
   },
   2: {
     badge: "Entretenimiento & Comedia",
@@ -368,7 +368,7 @@ const eventsData = {
     location: "Explanada de sistemas"
   },
   3: {
-    badge: "La nostalgia de 100 mexicanos",
+    badge: "100 mexicanos versión sistemas",
     title: "100 sistematicos",
     desc: "Un evento de preguntas y respuestas con temática de cultura general, sistemas, maestros, alumnos donde los asistentes podrán demostrar sus conocimientos y ganar premios.",
     date: "Lunes 09 de Noviembre",

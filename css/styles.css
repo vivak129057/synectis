@@ -555,7 +555,7 @@ section{ position:relative; padding:96px 0; }
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 30px;
-  align-items: center;
+  align-items: start; /* Cambiado de center a start */
   margin-top: 30px;
 }
 
@@ -572,6 +572,11 @@ section{ position:relative; padding:96px 0; }
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
 }
+
+.events-grid-carousel .event-card-thumb:nth-last-child(1):nth-child(odd) {
+  grid-column: span 2;
+}
+
 
 .event-card-thumb {
   position: relative;
