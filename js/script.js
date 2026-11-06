@@ -350,61 +350,19 @@ registroForm.addEventListener('submit', (e) => {
   }
 });
 
-const eventsData = {
-  1: {
-    badge: "Torneo de videojuegos",
-    title: "Torneo de super smash",
-    desc: "Demuestra tus habilidades en el torneo relámpago de la semana. Competencias con enfrentamientos directos y sorpresas para los finalistas.",
-    date: "Viernes 13 de Noviembre",
-    time: "12:00 hrs",
-    location: "Edificio rojo"
-  },
-  2: {
-    badge: "Entretenimiento & Comedia",
-    title: "Sistemas tiene talento",
-    desc: "Un espacio de distensión, risas, y diversión para los asistentes, con presentaciones de comedia, sketches y talentos ocultos de la comunidad estudiantil.",
-    date: "Miércoles 11 de Noviembre",
-    time: "12:00 hrs",
-    location: "Explanada de sistemas"
-  },
-  3: {
-    badge: "100 mexicanos versión sistemas",
-    title: "100 sistemáticos",
-    desc: "Un evento de preguntas y respuestas con temática de cultura general, sistemas, maestros, alumnos donde los asistentes podrán demostrar sus conocimientos y ganar premios.",
-    date: "Lunes 09 de Noviembre",
-    time: "13:00 hrs",
-    location: "Edificio de sistemas"
-  },
-  4: {
-    badge: "Tecnología & Concurso",
-    title: "Buscando a Linux",
-    desc: "Demuestra tu dominio encontrando archivos ocultos, configurando servicios y resolviendo retos en distribuciones Linux en el menor tiempo posible.",
-    date: "Martes 10 de Noviembre",
-    time: "11:00 hrs",
-    location: "Laboratorio de Redes"
-  },
-  5: {
-    badge: "Dinámica & Premios",
-    title: "Lotería sistemática",
-    desc: "Diviértete con la tradicional lotería adaptada con conceptos de ingeniería en sistemas. ¡Gana premios instantáneos completando tu tabla!",
-    date: "Jueves 12 de Noviembre",
-    time: "14:00 hrs",
-    location: "Vestíbulo Principal"
-  }
-};
-
 function showEventDetails(eventId) {
-  // Cambiar clases activas en las miniaturas
+  // Quitar la clase active de todas las miniaturas
   document.querySelectorAll('.event-card-thumb').forEach(thumb => {
     thumb.classList.remove('active');
   });
   
-  const activeThumb = document.querySelector(`[data-event="${eventId}"]`);
+  // Agregar la clase active a la miniatura seleccionada
+  const activeThumb = document.querySelector(`.event-card-thumb[data-event="${eventId}"]`);
   if (activeThumb) {
     activeThumb.classList.add('active');
   }
 
-  // Actualizar contenido de la tarjeta de detalles con animación sutil
+  // Actualizar contenido del panel de detalles con animación
   const panel = document.getElementById('eventDetailsPanel');
   panel.style.opacity = '0';
   panel.style.transform = 'translateY(10px)';
