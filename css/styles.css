@@ -557,11 +557,11 @@ section{ position:relative; padding:96px 0; }
   gap: 30px;
   align-items: start;
   margin-top: 30px;
-  min-width: 0; /* Evita que el contenedor grid colapse */
+  min-width: 0;
 }
 
 .events-interactive-wrapper > * {
-  min-width: 0; /* Evita que las columnas colapsen por el contenido interno */
+  min-width: 0;
 }
 
 .gallery-subtitle {
@@ -581,7 +581,6 @@ section{ position:relative; padding:96px 0; }
 .events-grid-carousel .event-card-thumb:nth-last-child(1):nth-child(odd) {
   grid-column: span 2;
 }
-
 
 .event-card-thumb {
   position: relative;
@@ -617,15 +616,14 @@ section{ position:relative; padding:96px 0; }
   display: flex;
   align-items: flex-end;
   padding: 12px;
+  pointer-events: none; /* Crucial para que el clic pase a la tarjeta */
 }
 
 .thumb-overlay span {
   color: #fff;
   font-size: 0.85rem;
   font-weight: 600;
-  pointer-events: none; /* Evita que la capa de texto bloquee el clic sobre la miniatura */
 }
-
 
 /* Panel de Detalles */
 .event-details-card {
@@ -694,7 +692,6 @@ section{ position:relative; padding:96px 0; }
   margin-top: 40px;
 }
 
-/* Responsivo para celulares */
 @media (max-width: 768px) {
   .events-interactive-wrapper {
     grid-template-columns: 1fr;
