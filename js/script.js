@@ -350,7 +350,8 @@ const eventsData = {
     desc: "Demuestra tus habilidades en el torneo relámpago de la semana. Competencias con enfrentamientos directos y sorpresas para los finalistas.",
     date: "Viernes 13 de Noviembre",
     time: "12:00 hrs",
-    location: "Edificio rojo"
+    location: "Edificio rojo",
+    formLink: "https://forms.gle/Rv72wKBphrfm9ShL8" // <--- Tu link de Google Forms para Smash
   },
   2: {
     badge: "Entretenimiento & Comedia",
@@ -358,7 +359,8 @@ const eventsData = {
     desc: "Un espacio de distensión, risas, y diversión para los asistentes, con presentaciones de comedia, sketches y talentos ocultos de la comunidad estudiantil.",
     date: "Miércoles 11 de Noviembre",
     time: "12:00 hrs",
-    location: "Explanada de sistemas"
+    location: "Explanada de sistemas",
+    formLink: "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=-hj4dttdgUuH6JaIENCSquDtjZuh5BpOq6o_8ovC4XtUMFpUU09JT1FCSkVESFQzWkUxR1BVNjNHVi4u" // <--- Tu link para Talento
   },
   3: {
     badge: "100 mexicanos versión sistemas",
@@ -366,7 +368,8 @@ const eventsData = {
     desc: "Un evento de preguntas y respuestas con temática de cultura general, sistemas, maestros, alumnos donde los asistentes podrán demostrar sus conocimientos y ganar premios.",
     date: "Lunes 09 de Noviembre",
     time: "13:00 hrs",
-    location: "Edificio de sistemas"
+    location: "Edificio de sistemas",
+    formLink: "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=-hj4dttdgUuH6JaIENCSquDtjZuh5BpOq6o_8ovC4XtUOEtLREhHNE5WMU5LNFdOV05UQjFZVUQxUy4u" // <--- Tu link para 100 Sistemáticos
   },
   4: {
     badge: "Tecnología & Concurso",
@@ -374,7 +377,8 @@ const eventsData = {
     desc: "Demuestra tu dominio encontrando archivos ocultos, configurando servicios y resolviendo retos en distribuciones Linux en el menor tiempo posible.",
     date: "Martes 10 de Noviembre",
     time: "11:00 hrs",
-    location: "Laboratorio de Redes"
+    location: "Laboratorio de Redes",
+    formLink: "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=-hj4dttdgUuH6JaIENCSquDtjZuh5BpOq6o_8ovC4XtUMEQ0NVBSR1hGVjlQUFBRME9FVEI5UzJKRi4u" // <--- Tu link para Linux
   },
   5: {
     badge: "Dinámica & Premios",
@@ -382,7 +386,8 @@ const eventsData = {
     desc: "Diviértete con la tradicional lotería adaptada con conceptos de ingeniería en sistemas. ¡Gana premios instantáneos completando tu tabla!",
     date: "Jueves 12 de Noviembre",
     time: "14:00 hrs",
-    location: "Vestíbulo Principal"
+    location: "Vestíbulo Principal",
+    formLink: "https://forms.gle/ENLACE_PARA_LOTERIA" // <--- Tu link para Lotería
   }
 };
 
