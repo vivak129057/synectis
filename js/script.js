@@ -467,3 +467,39 @@ if (document.readyState === 'loading') {
 } else {
   initEventCards();
 }
+
+/* ============================================================
+   CONTROL DE VENTANA EMERGENTE PARA ALUMNOS
+   ============================================================ */
+function abrirModalAlumnos(nombreTaller) {
+  const modal = document.getElementById('modalAlumnos');
+  const titulo = document.getElementById('tituloTallerModal');
+  if(titulo) titulo.textContent = nombreTaller;
+  if(modal) {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+const btnCerrarAlumnos = document.getElementById('cerrarModalAlumnos');
+if(btnCerrarAlumnos) {
+  btnCerrarAlumnos.addEventListener('click', () => {
+    const modal = document.getElementById('modalAlumnos');
+    if(modal) {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  });
+}
+
+// Cerrar haciendo clic fuera del recuadro
+window.addEventListener('click', (e) => {
+  const modal = document.getElementById('modalAlumnos');
+  if (e.target === modal) {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+});

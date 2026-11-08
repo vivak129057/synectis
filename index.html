@@ -204,17 +204,7 @@ integrales, eficientes y de alto impacto.
             <span><b>Horario:</b> Martes a Viernes, 8:00 AM - 12:00 PM</span>
           </div>
 
-          <div class="alumnos-container" style="margin-top: 12px; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 10px;">
-            <span style="font-size: 0.8rem; color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">
-              Alumnos inscritos:
-            </span>
-            <ul style="font-size: 0.82rem; color: var(--text-dim); padding-left: 16px; list-style-type: disc;">
-              <li>Nombre del alumno 1</li>
-              <li>Nombre del alumno 2</li>
-              <li>Nombre del alumno 3</li>
-              <!-- Agrega más etiquetas <li> según necesites -->
-            </ul>
-          </div>
+          <button type="button" class="btn btn-outline btn-small" style="margin-top: 12px; width: 100%;" onclick="abrirModalAlumnos('Mantenimiento de computadoras - Pedro Castro')">Ver alumnos inscritos</button>
         </div>
       </div>
     </div>
@@ -622,6 +612,27 @@ integrales, eficientes y de alto impacto.
     </div>
   </div>
 </footer>
+
+<!-- MODAL DE ALUMNOS INSCRITOS -->
+<div class="modal-overlay" id="modalAlumnos" aria-hidden="true">
+  <div class="modal" style="max-width: 500px;">
+    <button type="button" class="modal-close" id="cerrarModalAlumnos" aria-label="Cerrar">✕</button>
+    <div class="modal-header">
+      <span class="eyebrow">Listado oficial</span>
+      <h3 id="tituloTallerModal" style="font-size: 1.3rem;">Alumnos inscritos</h3>
+    </div>
+    
+    <!-- Aquí colocas la lista privada de alumnos -->
+    <div style="max-height: 300px; overflow-y: auto; padding-right: 5px;">
+      <ul style="font-size: 0.9rem; color: var(--text-dim); padding-left: 20px; display: flex; flex-direction: column; gap: 8px;" id="listaAlumnosContenedor">
+        <li>Nombre del alumno 1</li>
+        <li>Nombre del alumno 2</li>
+        <li>Nombre del alumno 3</li>
+        <!-- Agrega los <li> que necesites -->
+      </ul>
+    </div>
+  </div>
+</div>
 
 <script src="js/bg-interactive.js" defer></script>
 <script src="js/script.js" defer></script>
