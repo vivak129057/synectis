@@ -19,21 +19,88 @@ if (navToggle && mobileMenu) {
 }
 
 /* ============================================================
-   2. TABS: talleres por semestre
+   BASE DE DATOS PRIVADA DE ALUMNOS POR TALLER
    ============================================================ */
-const tabButtons = document.querySelectorAll('.tab-btn');
-const tabPanels = document.querySelectorAll('.tab-panel');
+const alumnosPorTaller = {
+  // 1° Semestre
+  'taller-1-1': { titulo: 'Mantenimiento de computadoras — Eric Balderas / Carlos Villalobos', alumnos: ['Alumno 1', 'Alumno 2'] },
+  'taller-1-2': { titulo: 'Mantenimiento de computadoras — Adrián Vargas', alumnos: [] },
+  'taller-1-3': { titulo: 'Mantenimiento de computadoras — Daniel Govea', alumnos: [] },
+  'taller-1-4': { titulo: 'Mantenimiento de computadoras — Jorge Barrios', alumnos: [] },
+  'taller-1-5': { titulo: 'Mantenimiento de computadoras — Hugo Rangel', alumnos: [] },
+  'taller-1-6': { titulo: 'Mantenimiento de computadoras — Pedro Castro', alumnos: [] },
 
-tabButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    tabButtons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
-    tabPanels.forEach(p => p.classList.remove('active'));
+  // 3° Semestre
+  'taller-3-1': { titulo: 'Python Tiene documentación, las personas no — Francisco Castañeda', alumnos: [] },
+  'taller-3-2': { titulo: 'Circuito Cerrado de Videovigilancia — César Hernández', alumnos: [] },
+  'taller-3-3': { titulo: 'Fundamentos de CiberInteligencia — Gustavo Guzmán', alumnos: [] },
+  'taller-3-4': { titulo: 'Seduciendo a godot — Adrián Ramírez', alumnos: [] },
+  'taller-3-5': { titulo: 'Vibe coding vs Programador IA Agéntica — Gabriel Celis', alumnos: [] },
 
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected','true');
-    const target = document.getElementById(btn.dataset.tab);
-    if(target) target.classList.add('active');
+  // 5° Semestre
+  'taller-5-1': { titulo: 'Building AI Agents with LangChain & LangGraph — Jaime Tenorio', alumnos: [] },
+  'taller-5-2': { titulo: 'CFDI 4.0 para Programadores — Jesús Ramírez', alumnos: [] },
+  'taller-5-3': { titulo: 'Power BI – Análisis de Datos Avanzado — Joaquín Salas', alumnos: [] },
+
+  // 7° Semestre
+  'taller-7-1': { titulo: 'Sistemas Expertos — Bruno López Takeyas', alumnos: [] },
+  'taller-7-2': { titulo: 'Desarrollo de APIs con Nest.js — Joel Maldonado', alumnos: [] },
+  'taller-7-3': { titulo: 'Tecnologías en la Gestión del Comercio Exterior — José Ortega', alumnos: [] },
+
+  // 9° Semestre
+  'taller-9-1': { titulo: 'Aduanas, pedimentos, clasificación — Jesús Mancilla', alumnos: [] },
+  'taller-9-2': { titulo: 'Ingeniero 360: Salud, Dinero y Éxito — Alan Ordoñes', alumnos: [] }
+};
+
+/* ============================================================
+   CONTROL DE VENTANA EMERGENTE PARA ALUMNOS
+   ============================================================ */
+function abrirModalAlumnos(tallerKey) {
+  const modal = document.getElementById('modalAlumnos');
+  const titulo = document.getElementById('tituloTallerModal');
+  const contenedorLista = document.getElementById('listaAlumnosContenedor');
+  
+  const data = alumnosPorTaller[tallerKey];
+  
+  if (titulo) {
+    titulo.textContent = data ? data.titulo : 'Alumnos inscritos';
+  }
+  
+  if (contenedorLista) {
+    if (data && data.alumnos && data.alumnos.length > 0) {
+      contenedorLista.innerHTML = data.alumnos.map(nombre => `<li>${nombre}</li>`).join('');
+    } else {
+      contenedorLista.innerHTML = '<li>Lista de alumnos en proceso de actualización o privada.</li>';
+    }
+  }
+
+  if(modal) {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+const btnCerrarAlumnos = document.getElementById('cerrarModalAlumnos');
+if(btnCerrarAlumnos) {
+  btnCerrarAlumnos.addEventListener('click', () => {
+    const modal = document.getElementById('modalAlumnos');
+    if(modal) {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
   });
+}
+
+// Cerrar haciendo clic fuera del recuadro
+window.addEventListener('click', (e) => {
+  const modal = document.getElementById('modalAlumnos');
+  if (e.target === modal) {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
 });
 
 /* ============================================================
@@ -467,39 +534,3 @@ if (document.readyState === 'loading') {
 } else {
   initEventCards();
 }
-
-/* ============================================================
-   CONTROL DE VENTANA EMERGENTE PARA ALUMNOS
-   ============================================================ */
-function abrirModalAlumnos(nombreTaller) {
-  const modal = document.getElementById('modalAlumnos');
-  const titulo = document.getElementById('tituloTallerModal');
-  if(titulo) titulo.textContent = nombreTaller;
-  if(modal) {
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-const btnCerrarAlumnos = document.getElementById('cerrarModalAlumnos');
-if(btnCerrarAlumnos) {
-  btnCerrarAlumnos.addEventListener('click', () => {
-    const modal = document.getElementById('modalAlumnos');
-    if(modal) {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-  });
-}
-
-// Cerrar haciendo clic fuera del recuadro
-window.addEventListener('click', (e) => {
-  const modal = document.getElementById('modalAlumnos');
-  if (e.target === modal) {
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-});
